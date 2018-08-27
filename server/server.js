@@ -17,7 +17,20 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('User was disconnected');
+  });
+
+  setInterval(() => {
+    socket.emit('newMessage', {
+      from: 'me',
+      timestamp: 'timestamp',
+      text: 'from me to you.'
+    });
+  }, 2000);
+
+  socket.on('createMessage', (data) => {
+    console.log('createMessage:', JSON.stringify(data, undefined, 2));
   })
+
 });
 
 
