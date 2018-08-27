@@ -37,11 +37,9 @@ io.on('connection', (socket) => {
     console.log('User was disconnected');
   });
 
-  socket.on('createMessage', (data) => {
-    io.emit('newMessage', generateMessage({ // emit on every connected socket, where 1 socket = 1 client
-      ...data,
-      timestamp: new Date().getTime()
-    }));
+  socket.on('createMessage', (data, callback) => {
+    io.emit('newMessage', generateMessage(data)); // emit on every connected socket, where 1 socket = 1 client
+    callback('This is from the server.');
     // socket.broadcast.emit('newMessage', { // send the message on all except the source
     //   ...data,
     //   timestamp: new Date().getTime()

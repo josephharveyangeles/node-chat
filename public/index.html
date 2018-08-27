@@ -7,9 +7,20 @@
   <title>Chat</title>
 </head>
 <body>
-  <p>Welcome to the chat app.</p>
+  <div id="app">
+    <p>Welcome to the chat app.</p>
+    <p>{{welcome}}</p>
+    <div>
+      <input v-model="message" type="text" placeholder="Your message"/>
+      <button @click="sendMessage()">Send</button>
+    </div>
+    <ul>
+      <li v-for="(item, index) in messages" :key="index">{{item}}</li>
+    </ul>
+  </div>
 
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/libs/vue.min.js"></script>
   <script src="/js/index.js"></script>
 </body>
 </html>
