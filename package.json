@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server/server.js"
   },
   "engines": {
     "node": "8.11.3"
@@ -13,6 +14,7 @@
   "author": "Joseph Harvey Angeles <josephharveyangeles@gmail.com> (http://josephharveyangeles.com)",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
   }
 }
