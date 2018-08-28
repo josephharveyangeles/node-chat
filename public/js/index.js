@@ -42,11 +42,13 @@ const app = new Vue({
       );
     },
     receiveMessage(message) {
-      const string = `${message.from}: ${message.text}`;
+      const timestamp = moment(message.timestamp).format('h:mm a');
+      const string = `${message.from} ${timestamp}: ${message.text}`;
       this.messages.push(string);
     },
     receiveLocationMessage(data) {
-      const anchor = `${data.from}: <a href="${data.url}" target="_blank">My Location</a>`;
+      const timestamp = moment(data.timestamp).format('h:mm a');
+      const anchor = `${data.from} ${timestamp}: <a href="${data.url}" target="_blank">My Location</a>`;
       this.messages.push(anchor);
     }
   }
