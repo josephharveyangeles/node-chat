@@ -2,40 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Chat</title>
+  <title>Join | Discrewd</title>
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
-<body>
-  <div id="app" class="chat">
-    <div class="chat__sidebar">
-      <h3>People</h3>
-      <div id="users"></div>
-    </div>
-    <div class="chat__main">
-      <ul id="messages" class="chat__messages">
-        <li v-for="(item, index) in messages" :key="index" class="message">
-          <div class="message__title">
-            <h4>{{item.from}}</h4>
-            <span>{{item.timestamp}}</span>
-          </div>
-          <div class="message__body">
-            <p v-html="item.text"></p>
-          </div>
-        </li>
-      </ul>
-      <div class="chat__footer">
-        <input v-model="message" @keyup.enter="sendMessage()" type="text" placeholder="Your message" autofocus autocomplete="off"/>
-        <button @click="sendMessage()" :disabled="disableButtons">Send</button>
-        <button @click="sendLocation()" :disabled="disableButtons">{{locationButtonName}}</button>
+<body class="centered-form">
+  <div class="centered-form__form">
+    <form action="/chat.html">
+      <div class="form-field">
+        <h3>Join Discrewd</h3>
       </div>
-    </div>
+      <div class="form-field">
+        <label>Display name</label>
+        <input type="text" name="name" autofocus />
+      </div>
+      <div class="form-field">
+          <label>Room name</label>
+          <input type="text" name="room"/>
+      </div>
+      <div class="form-field">
+        <button>Join</button>
+      </div>
+    </form>
   </div>
-
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/js/libs/vue.min.js"></script>
-  <script src="/js/libs/moment.js"></script>
-  <script src="/js/index.js"></script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, iser-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="app" class="chat">
+    <div class="chat__sidebar">
+      <h3>People</h3>
+      <div id="users"></div>
+    </div>
+    <div class="chat__main">
+      <ul id="messages" class="chat__messages">
+        <li v-for="(item, index) in messages" :key="index" class="message">
+          <div class="message__title">
+            <h4>{{item.from}}</h4>
+            <span>{{item.timestamp}}</span>
+          </div>
+          <div class="message__body">
+            <p v-html="item.text"></p>
+          </div>
+        </li>
+      </ul>
+      <div class="chat__footer">
+        <input v-model="message" @keyup.enter="sendMessage()" type="text" placeholder="Your message" autofocus autocomplete="off"/>
+        <button @click="sendMessage()" :disabled="disableButtons">Send</button>
+        <button @click="sendLocation()" :disabled="disableButtons">{{locationButtonName}}</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/libs/vue.min.js"></script>
+  <script src="/js/libs/moment.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>
