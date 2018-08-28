@@ -13,9 +13,10 @@
     <div>
       <input v-model="message" type="text" placeholder="Your message"/>
       <button @click="sendMessage()">Send</button>
+      <button @click="sendLocation()">Send location</button>
     </div>
     <ul>
-      <li v-for="(item, index) in messages" :key="index">{{item}}</li>
+      <li v-for="(item, index) in messages" :key="index" v-html="item"></li>
     </ul>
   </div>
 

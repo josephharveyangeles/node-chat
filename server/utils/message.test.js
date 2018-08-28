@@ -1,5 +1,5 @@
 const expect = require('expect');
-const {generateMessage} = require('./message');
+const {generateMessage, generateLocationMessage} = require('./message');
 
 describe('generateMessage', () => {
 
@@ -14,4 +14,19 @@ describe('generateMessage', () => {
     expect(typeof expected.timeStamp).toEqual('number');
   });
 
+});
+
+describe('generateLocationMessage', () => {
+  it('should generate correct location object', () => {
+    const payload = {
+      from: 'admin',
+      latitude: 0,
+      longitude: 1
+    };
+    const expectedURL = `https://www.google.com/maps?q=${payload.latitude},${payload.longitude}`;
+    const actualData = generateLocationMessage(payload);
+    expect(actualData.from).toEqual(payload.from);
+    expect(actualData.timeStamp).not.toBeNull();
+    expect(actualData.url).toEqual(expectedURL);
+  });
 });
