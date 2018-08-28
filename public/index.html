@@ -14,7 +14,7 @@
       <div id="users"></div>
     </div>
     <div class="chat__main">
-      <ul class="chat__messages">
+      <ul id="messages" class="chat__messages">
         <li v-for="(item, index) in messages" :key="index" class="message">
           <div class="message__title">
             <h4>{{item.from}}</h4>
@@ -26,7 +26,7 @@
         </li>
       </ul>
       <div class="chat__footer">
-        <input v-model="message" type="text" placeholder="Your message" autofocus autocomplete="off"/>
+        <input v-model="message" @keyup.enter="sendMessage()" type="text" placeholder="Your message" autofocus autocomplete="off"/>
         <button @click="sendMessage()" :disabled="disableButtons">Send</button>
         <button @click="sendLocation()" :disabled="disableButtons">{{locationButtonName}}</button>
       </div>

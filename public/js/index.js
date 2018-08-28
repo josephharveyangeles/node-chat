@@ -69,10 +69,38 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', function (data) {
-  console.log('newMessage', data);
+  // console.log('newMessage', data);
   app.receiveMessage(data);
+  scrollToBottom();
 });
 
 socket.on('newLocationMessage', function(data) {
   app.receiveLocationMessage(data);
+  scrollToBottom();
 });
+
+function scrollToBottom() {
+  const messages = document.getElementById('messages');
+  const newMessage = messages.lastChild;
+
+  const clientHeight = messages.clientHeight;
+  const scrollTop = messages.scrollTop;
+  const scrollHeight = messages.scrollHeight;
+  if (!newMessage) {
+    return;
+  }
+  const newMessageHeight = newMessage.getBoundingClientRect().height;
+  const secondToLastChild = messages.childNodes[messages.childElementCount - 2];
+  const secondToLastHeight = secondToLastChild ? secondToLastChild.getBoundingClientRect().height : 0;
+
+  if (clientHeight +
+      scrollTop + 
+      newMessageHeight +
+      secondToLastHeight
+      >= scrollHeight) {
+        setTimeout(() => {
+          messages.scrollTop = scrollHeight;
+        }, 200);
+
+  }
+}
