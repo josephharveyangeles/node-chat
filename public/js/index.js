@@ -43,13 +43,19 @@ const app = new Vue({
     },
     receiveMessage(message) {
       const timestamp = moment(message.timestamp).format('h:mm a');
-      const string = `${message.from} ${timestamp}: ${message.text}`;
-      this.messages.push(string);
+      this.messages.push({
+        from: message.from,
+        timestamp,
+        text: message.text
+      });
     },
     receiveLocationMessage(data) {
       const timestamp = moment(data.timestamp).format('h:mm a');
-      const anchor = `${data.from} ${timestamp}: <a href="${data.url}" target="_blank">My Location</a>`;
-      this.messages.push(anchor);
+      this.messages.push({
+        from: data.from,
+        timestamp,
+        text: `<a href="${data.url}" target="_blank">My Location</a>`
+      });
     }
   }
 });

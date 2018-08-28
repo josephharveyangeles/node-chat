@@ -15,7 +15,15 @@
     </div>
     <div class="chat__main">
       <ul class="chat__messages">
-        <li v-for="(item, index) in messages" :key="index" v-html="item"></li>
+        <li v-for="(item, index) in messages" :key="index" class="message">
+          <div class="message__title">
+            <h4>{{item.from}}</h4>
+            <span>{{item.timestamp}}</span>
+          </div>
+          <div class="message__body">
+            <p v-html="item.text"></p>
+          </div>
+        </li>
       </ul>
       <div class="chat__footer">
         <input v-model="message" type="text" placeholder="Your message" autofocus autocomplete="off"/>
