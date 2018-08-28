@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 
   socket.on('createMessage', (data, callback) => {
     io.emit('newMessage', generateMessage(data)); // emit on every connected socket, where 1 socket = 1 client
-    callback('This is from the server.');
+    callback();
     // socket.broadcast.emit('newMessage', { // send the message on all except the source
     //   ...data,
     //   timestamp: new Date().getTime()

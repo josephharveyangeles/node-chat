@@ -5,19 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Chat</title>
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-  <div id="app">
-    <p>Welcome to the chat app.</p>
-    <p>{{welcome}}</p>
-    <div>
-      <input v-model="message" type="text" placeholder="Your message"/>
-      <button @click="sendMessage()">Send</button>
-      <button @click="sendLocation()">Send location</button>
+  <div id="app" class="chat">
+    <div class="chat__sidebar">
+      <h3>People</h3>
+      <div id="users"></div>
     </div>
-    <ul>
-      <li v-for="(item, index) in messages" :key="index" v-html="item"></li>
-    </ul>
+    <div class="chat__main">
+      <ul class="chat__messages">
+        <li v-for="(item, index) in messages" :key="index" v-html="item"></li>
+      </ul>
+      <div class="chat__footer">
+        <input v-model="message" type="text" placeholder="Your message" autofocus autocomplete="off"/>
+        <button @click="sendMessage()" :disabled="disableButtons">Send</button>
+        <button @click="sendLocation()" :disabled="disableButtons">{{locationButtonName}}</button>
+      </div>
+    </div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
