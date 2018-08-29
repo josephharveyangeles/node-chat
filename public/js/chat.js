@@ -16,12 +16,10 @@ const app = new Vue({
   },
   methods: {
     updateUserList(data) {
-      console.log(data);
       this.users = data;
     },
     sendMessage() {
       socket.emit('createMessage', {
-        from: 'Frank',
         text: this.message
       }, () => {
         this.message = '';
@@ -66,14 +64,12 @@ const app = new Vue({
 });
 
 socket.on('connect', function () {
-  console.log('connected to server.');
   const roomParams = deparam(window.location.search);
   socket.emit('join', roomParams, function(err) {
     if (err) {
       alert(err);
       return window.location.href = "/";
     }
-    console.log('no error');
   });
 });
 
@@ -82,7 +78,6 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', function (data) {
-  // console.log('newMessage', data);
   app.receiveMessage(data);
   scrollToBottom();
 });

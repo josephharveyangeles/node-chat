@@ -85,19 +85,25 @@ io.on('connection', (socket) => {
     }
   });
 
+  // client created a message
   socket.on('createMessage', (data, callback) => {
-    io.emit('newMessage', generateMessage(data)); // emit on every connected socket, where 1 socket = 1 client
+    const user = users.getUser(socket.id);
+    if (!user || !isRealString(data.text)) {
+      return;
+    }
+    io.to(user.room).emit('newMessage', generateMessage({
+      from: user.name,
+      text: data.text
+    }));
     callback();
-    // socket.broadcast.emit('newMessage', { // send the message on all except the source
-    //   ...data,
-    //   timestamp: new Date().getTime()
-    // });
-
   });
 
   socket.on('createLocationMessage', (coords) => {
-    io.emit('newLocationMessage', generateLocationMessage({from: 'admin', ...coords}));
-  })
+    const user = users.getUser(socket.id);
+    if (user) {
+      io.to(user.room).emit('newLocationMessage', generateLocationMessage({from: user.name, ...coords}));
+    }
+  });
 
 });
 
